@@ -71,10 +71,6 @@ form label {
 }
 
 
-form label:first-child {
-    margin-top: 0;
-}
-
 form input,
 form textarea {
     background-color: #3a3a3a;
