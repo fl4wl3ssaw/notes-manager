@@ -7,7 +7,6 @@ body {
     font-family: system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.4;
-
     background-color: #2b2b2b;
     color: #e0e0e0;
 }
@@ -16,63 +15,66 @@ body {
     color: #ff4757;
 }
 
-header {
+/* Виправлено: замінено селектор тегу header на клас .header */
+.header {
     background-color: #1e1e1e;
     padding: 20px;
     border-bottom: 1px solid #444;
     text-align: center;
 }
 
-header h1 {
+/* Виправлено: замінено селектор header h1 на клас .header-title */
+.header-title {
     margin: 0 0 15px 0;
     color: #ffffff;
     font-size: 2rem;
 }
 
-header nav a {
+/* Виправлено: замінено селектор header nav a на клас .nav-link */
+.nav-link {
     color: #e0e0e0;
     text-decoration: none;
     margin-right: 20px;
     font-weight: bold;
 }
 
-header nav a:hover {
+.nav-link:hover {
     color: #ff4757;
 }
 
-
-main {
+/* Виправлено: замінено селектор тегу main на клас .main */
+.main {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-section {
+/* Виправлено: замінено селектор тегу section на клас .section */
+.section {
     margin-bottom: 40px;
 }
 
-section h2 {
+/* Виправлено: замінено селектор section h2 на клас .section-title */
+.section-title {
     color: #ffffff;
     border-bottom: 1px solid #444;
     padding-bottom: 10px;
 }
 
-form label,
-form input,
-form textarea {
+/* Виправлено: замінено селектори тегів form label, form input, form textarea на класи */
+.form-label,
+.form-input {
     display: block;
     width: 100%;
 }
 
-form label {
+.form-label {
     margin-bottom: 5px;
     margin-top: 15px;
     color: #e0e0e0;
 }
 
-
-form input,
-form textarea {
+.form-input {
     background-color: #3a3a3a;
     color: #e0e0e0;
     padding: 12px;
@@ -81,12 +83,14 @@ form textarea {
     font-family: inherit;
 }
 
-form textarea {
+/* Виправлено: додано окремий клас .form-textarea замість селектора form textarea */
+.form-textarea {
     resize: vertical;
     min-height: 80px;
 }
 
-article {
+/* Виправлено: замінено селектор тегу article на клас .note-card */
+.note-card {
     background-color: #333333;
     padding: 15px;
     margin-bottom: 20px;
@@ -96,13 +100,14 @@ article {
     overflow: hidden;
 }
 
-article h3 {
+/* Виправлено: замінено селектор article h3 на клас .note-title */
+.note-title {
     margin-top: 0;
     color: #ffffff;
 }
 
-
-aside {
+/* Виправлено: замінено селектор тегу aside на клас .sidebar */
+.sidebar {
     background-color: #121212;
     padding: 20px;
     border-left: 4px solid #ff4757;
@@ -111,7 +116,8 @@ aside {
     border-radius: 8px;
 }
 
-aside article {
+/* Виправлено: замінено селектор aside article на клас-модифікатор .note-card--full */
+.note-card--full {
     background-color: #333333;
     padding: 20px;
     border-radius: 8px;
@@ -119,7 +125,8 @@ aside article {
     overflow: visible;
 }
 
-footer {
+/* Виправлено: замінено селектор тегу footer на клас .footer */
+.footer {
     text-align: center;
     padding: 30px 20px;
     font-size: 0.85rem;

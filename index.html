@@ -8,56 +8,56 @@
 <body>
 
 <!-- Шапка з назвою -->
-<header>
-    <h1>Менеджер нотаток</h1>
-    <nav>
-        <a href="#new">Нова нотатка</a>
-        <a href="#list">Мої нотатки</a>
+<header class="header"> <!-- Додано клас header -->
+    <h1 class="header-title">Менеджер нотаток</h1> <!-- Додано клас header-title -->
+    <nav class="nav"> <!-- Додано клас nav -->
+        <a href="#new" class="nav-link">Нова нотатка</a> <!-- Додано клас nav-link -->
+        <a href="#list" class="nav-link">Мої нотатки</a> <!-- Додано клас nav-link -->
     </nav>
 </header>
 
-<main>
+<main class="main"> <!-- Додано клас main -->
     <!-- Форма створення нотатки -->
-    <section>
-        <h2>Нова нотатка</h2>
-        <form>
-            <label for="title">Заголовок:</label>
-            <input type="text" id="title">
+    <section class="section"> <!-- Додано клас section -->
+        <h2 class="section-title">Нова нотатка</h2> <!-- Додано клас section-title -->
+        <form class="form"> <!-- Додано клас form -->
+            <label for="title" class="form-label">Заголовок:</label> <!-- Додано клас form-label -->
+            <input type="text" id="title" class="form-input"> <!-- Додано клас form-input -->
 
-            <label for="textarea">Текст:</label>
-            <textarea type="textarea" id="textarea"></textarea>
+            <label for="textarea" class="form-label">Текст:</label> <!-- Додано клас form-label -->
+            <textarea id="textarea" class="form-input form-textarea"></textarea> <!-- Додано класи form-input та form-textarea -->
         </form>
     </section>
 
     <!-- Список нотаток (картки із заголовком і уривком) -->
-    <section>
-        <h2>Мої нотатки</h2>
+    <section class="section"> <!-- Додано клас section -->
+        <h2 class="section-title">Мої нотатки</h2> <!-- Додано клас section-title -->
 
-        <article>
-            <h3>Паролі від сервісів</h3>
-            <p>Робоча пошта: admin123...</p>
+        <article class="note-card"> <!-- Додано клас note-card -->
+            <h3 class="note-title">Паролі від сервісів</h3> <!-- Додано клас note-title -->
+            <p class="note-text">Робоча пошта: admin123...</p> <!-- Додано клас note-text -->
         </article>
 
-        <article>
-            <h3>Ідеї для проєкту</h3>
-            <p>Зробити редизайн сторінки...</p>
+        <article class="note-card"> <!-- Додано клас note-card -->
+            <h3 class="note-title">Ідеї для проєкту</h3> <!-- Додано клас note-title -->
+            <p class="note-text">Зробити редизайн сторінки...</p> <!-- Додано клас note-text -->
         </article>
     </section>
 </main>
 
 <!-- Блок перегляду обраної нотатки повністю -->
-<aside>
-    <h2>Перегляд обраної нотатки</h2>
-    <article>
-        <h3>Паролі від сервісів</h3>
-        <p>Робоча пошта: admin123</p>
-        <p>Пін-код від офісу: 4321</p>
+<aside class="sidebar"> <!-- Додано клас sidebar -->
+    <h2 class="sidebar-title">Перегляд обраної нотатки</h2> <!-- Додано клас sidebar-title -->
+    <article class="note-card note-card--full"> <!-- Додано класи note-card та модифікатор note-card--full -->
+        <h3 class="note-title">Паролі від сервісів</h3>
+        <p class="note-text">Робоча пошта: admin123</p>
+        <p class="note-text">Пін-код від офісу: 4321</p>
     </article>
 </aside>
 
 <!-- Підвал -->
-<footer>
-    <p>Автор проєкту: Лаба Іван, 2026</p>
+<footer class="footer"> <!-- Додано клас footer -->
+    <p class="footer-text">Автор проєкту: Лаба Іван, 2026</p> <!-- Додано клас footer-text -->
 </footer>
 
 </body>
