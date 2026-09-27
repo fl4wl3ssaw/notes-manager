@@ -15,7 +15,6 @@ body {
     color: #ff4757;
 }
 
-/* Виправлено: замінено селектор тегу header на клас .header */
 .header {
     background-color: #1e1e1e;
     padding: 20px;
@@ -23,14 +22,12 @@ body {
     text-align: center;
 }
 
-/* Виправлено: замінено селектор header h1 на клас .header-title */
 .header-title {
     margin: 0 0 15px 0;
     color: #ffffff;
     font-size: 2rem;
 }
 
-/* Виправлено: замінено селектор header nav a на клас .nav-link */
 .nav-link {
     color: #e0e0e0;
     text-decoration: none;
@@ -42,26 +39,22 @@ body {
     color: #ff4757;
 }
 
-/* Виправлено: замінено селектор тегу main на клас .main */
 .main {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Виправлено: замінено селектор тегу section на клас .section */
 .section {
     margin-bottom: 40px;
 }
 
-/* Виправлено: замінено селектор section h2 на клас .section-title */
 .section-title {
     color: #ffffff;
     border-bottom: 1px solid #444;
     padding-bottom: 10px;
 }
 
-/* Виправлено: замінено селектори тегів form label, form input, form textarea на класи */
 .form-label,
 .form-input {
     display: block;
@@ -83,13 +76,11 @@ body {
     font-family: inherit;
 }
 
-/* Виправлено: додано окремий клас .form-textarea замість селектора form textarea */
 .form-textarea {
     resize: vertical;
     min-height: 80px;
 }
 
-/* Виправлено: замінено селектор тегу article на клас .note-card */
 .note-card {
     background-color: #333333;
     padding: 15px;
@@ -100,13 +91,11 @@ body {
     overflow: hidden;
 }
 
-/* Виправлено: замінено селектор article h3 на клас .note-title */
 .note-title {
     margin-top: 0;
     color: #ffffff;
 }
 
-/* Виправлено: замінено селектор тегу aside на клас .sidebar */
 .sidebar {
     background-color: #121212;
     padding: 20px;
@@ -116,7 +105,6 @@ body {
     border-radius: 8px;
 }
 
-/* Виправлено: замінено селектор aside article на клас-модифікатор .note-card--full */
 .note-card--full {
     background-color: #333333;
     padding: 20px;
@@ -125,7 +113,6 @@ body {
     overflow: visible;
 }
 
-/* Виправлено: замінено селектор тегу footer на клас .footer */
 .footer {
     text-align: center;
     padding: 30px 20px;

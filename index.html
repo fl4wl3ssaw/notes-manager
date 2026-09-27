@@ -4,51 +4,52 @@
     <meta charset="UTF-8">
     <title>Менеджер нотаток</title>
     <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 <!-- Шапка з назвою -->
-<header class="header"> <!-- Додано клас header -->
-    <h1 class="header-title">Менеджер нотаток</h1> <!-- Додано клас header-title -->
-    <nav class="nav"> <!-- Додано клас nav -->
-        <a href="#new" class="nav-link">Нова нотатка</a> <!-- Додано клас nav-link -->
-        <a href="#list" class="nav-link">Мої нотатки</a> <!-- Додано клас nav-link -->
+<header class="header">
+    <h1 class="header-title">Менеджер нотаток</h1>
+    <nav class="nav">
+        <a href="#new" class="nav-link">Нова нотатка</a>
+        <a href="#list" class="nav-link">Мої нотатки</a>
     </nav>
 </header>
 
-<main class="main"> <!-- Додано клас main -->
+<main class="main">
     <!-- Форма створення нотатки -->
-    <section class="section"> <!-- Додано клас section -->
-        <h2 class="section-title">Нова нотатка</h2> <!-- Додано клас section-title -->
-        <form class="form"> <!-- Додано клас form -->
-            <label for="title" class="form-label">Заголовок:</label> <!-- Додано клас form-label -->
-            <input type="text" id="title" class="form-input"> <!-- Додано клас form-input -->
+    <section class="section" id="new">
+        <h2 class="section-title">Нова нотатка</h2>
+        <form class="form">
+            <label for="title" class="form-label">Заголовок:</label>
+            <input type="text" id="title" class="form-input">
 
-            <label for="textarea" class="form-label">Текст:</label> <!-- Додано клас form-label -->
-            <textarea id="textarea" class="form-input form-textarea"></textarea> <!-- Додано класи form-input та form-textarea -->
+            <label for="textarea" class="form-label">Текст:</label>
+            <textarea id="textarea" class="form-input form-textarea"></textarea>
         </form>
     </section>
 
     <!-- Список нотаток (картки із заголовком і уривком) -->
-    <section class="section"> <!-- Додано клас section -->
-        <h2 class="section-title">Мої нотатки</h2> <!-- Додано клас section-title -->
+    <section class="section" id="list">
+        <h2 class="section-title">Мої нотатки</h2>
 
-        <article class="note-card"> <!-- Додано клас note-card -->
-            <h3 class="note-title">Паролі від сервісів</h3> <!-- Додано клас note-title -->
-            <p class="note-text">Робоча пошта: admin123...</p> <!-- Додано клас note-text -->
+        <article class="note-card">
+            <h3 class="note-title">Паролі від сервісів</h3>
+            <p class="note-text">Робоча пошта: admin123...</p>
         </article>
 
-        <article class="note-card"> <!-- Додано клас note-card -->
-            <h3 class="note-title">Ідеї для проєкту</h3> <!-- Додано клас note-title -->
-            <p class="note-text">Зробити редизайн сторінки...</p> <!-- Додано клас note-text -->
+        <article class="note-card">
+            <h3 class="note-title">Ідеї для проєкту</h3>
+            <p class="note-text">Зробити редизайн сторінки...</p>
         </article>
     </section>
 </main>
 
 <!-- Блок перегляду обраної нотатки повністю -->
-<aside class="sidebar"> <!-- Додано клас sidebar -->
-    <h2 class="sidebar-title">Перегляд обраної нотатки</h2> <!-- Додано клас sidebar-title -->
-    <article class="note-card note-card--full"> <!-- Додано класи note-card та модифікатор note-card--full -->
+<aside class="sidebar">
+    <h2 class="sidebar-title">Перегляд обраної нотатки</h2>
+    <article class="note-card note-card--full">
         <h3 class="note-title">Паролі від сервісів</h3>
         <p class="note-text">Робоча пошта: admin123</p>
         <p class="note-text">Пін-код від офісу: 4321</p>
@@ -56,8 +57,8 @@
 </aside>
 
 <!-- Підвал -->
-<footer class="footer"> <!-- Додано клас footer -->
-    <p class="footer-text">Автор проєкту: Лаба Іван, 2026</p> <!-- Додано клас footer-text -->
+<footer class="footer">
+    <p class="footer-text">Автор проєкту: Лаба Іван, 2026</p>
 </footer>
 
 </body>
