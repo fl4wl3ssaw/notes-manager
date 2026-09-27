@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Менеджер нотаток</title>
     <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -16,44 +17,50 @@
     </nav>
 </header>
 
-<main>
-    <!-- Форма створення нотатки -->
-    <section>
-        <h2>Нова нотатка</h2>
-        <form>
-            <label for="title">Заголовок:</label>
-            <input type="text" id="title">
+<!-- Обгортка для десктопної сітки (main + aside) -->
+<div class="layout-wrapper">
+    <main>
+        <!-- Форма створення нотатки -->
+        <section id="new">
+            <h2>Нова нотатка</h2>
+            <form>
+                <label for="title">Заголовок:</label>
+                <input type="text" id="title">
 
-            <label for="textarea">Текст:</label>
-            <textarea type="textarea" id="textarea"></textarea>
-        </form>
-    </section>
+                <label for="textarea">Текст:</label>
+                <textarea id="textarea"></textarea>
+            </form>
+        </section>
 
-    <!-- Список нотаток (картки із заголовком і уривком) -->
-    <section>
-        <h2>Мої нотатки</h2>
+        <!-- Список нотаток (картки із заголовком і уривком) -->
+        <section id="list">
+            <h2>Мої нотатки</h2>
 
+            <!-- Обгортка для сітки карток -->
+            <div class="cards-container">
+                <article>
+                    <h3>Паролі від сервісів</h3>
+                    <p>Робоча пошта: admin123...</p>
+                </article>
+
+                <article>
+                    <h3>Ідеї для проєкту</h3>
+                    <p>Зробити редизайн сторінки...</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Блок перегляду обраної нотатки повністю -->
+    <aside>
+        <h2>Перегляд обраної нотатки</h2>
         <article>
             <h3>Паролі від сервісів</h3>
-            <p>Робоча пошта: admin123...</p>
+            <p>Робоча пошта: admin123</p>
+            <p>Пін-код від офісу: 4321</p>
         </article>
-
-        <article>
-            <h3>Ідеї для проєкту</h3>
-            <p>Зробити редизайн сторінки...</p>
-        </article>
-    </section>
-</main>
-
-<!-- Блок перегляду обраної нотатки повністю -->
-<aside>
-    <h2>Перегляд обраної нотатки</h2>
-    <article>
-        <h3>Паролі від сервісів</h3>
-        <p>Робоча пошта: admin123</p>
-        <p>Пін-код від офісу: 4321</p>
-    </article>
-</aside>
+    </aside>
+</div>
 
 <!-- Підвал -->
 <footer>

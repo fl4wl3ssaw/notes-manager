@@ -16,23 +16,35 @@ body {
     color: #ff4757;
 }
 
+/* Крок 2: Навігація на Flexbox (Мобільний (базовий) вигляд - стовпчик) */
 header {
     background-color: #1e1e1e;
     padding: 20px;
     border-bottom: 1px solid #444;
-    text-align: center;
+
+    /* Вмикаємо Flexbox */
+    display: flex;
+    flex-direction: column; /* Елементи йдуть один під одним */
+    align-items: center; /* Центруємо по горизонталі */
+    gap: 15px; /* Відстань між заголовком та блоком навігації */
 }
 
 header h1 {
-    margin: 0 0 15px 0;
+    margin: 0; /* Прибираємо старі margin, бо тепер працює gap */
     color: #ffffff;
     font-size: 2rem;
+}
+
+header nav {
+    display: flex;
+    flex-direction: column; /* Посилання на мобільному теж у стовпчик */
+    align-items: center;
+    gap: 10px; /* Замінює старий margin-right між пунктами */
 }
 
 header nav a {
     color: #e0e0e0;
     text-decoration: none;
-    margin-right: 20px;
     font-weight: bold;
 }
 
@@ -126,4 +138,47 @@ footer {
     color: #888888;
     border-top: 1px solid #444;
     margin-top: 40px;
+}
+
+.layout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 600px) {
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    header nav {
+        flex-direction: row;
+    }
+
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 1024px) {
+    .layout-wrapper {
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+        max-width: 1200px;
+    }
+
+    .cards-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+img {
+    max-width: 100%;
+    height: auto;
 }
