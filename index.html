@@ -16,46 +16,50 @@
         <a href="#list" class="nav-link">Мої нотатки</a>
     </nav>
 </header>
+<!-- Обгортка для десктопної сітки (main + aside) -->
+<div class="layout-wrapper">
+    <main class="main">
+        <!-- Форма створення нотатки -->
+        <section class="section" id="new">
+            <h2 class="section-title">Нова нотатка</h2>
+            <form class="form">
+                <label for="title" class="form-label">Заголовок:</label>
+                <input type="text" id="title" class="form-input">
 
-<main class="main">
-    <!-- Форма створення нотатки -->
-    <section class="section" id="new">
-        <h2 class="section-title">Нова нотатка</h2>
-        <form class="form">
-            <label for="title" class="form-label">Заголовок:</label>
-            <input type="text" id="title" class="form-input">
+                <label for="textarea" class="form-label">Текст:</label>
+                <textarea id="textarea" class="form-input form-textarea"></textarea>
+            </form>
+        </section>
 
-            <label for="textarea" class="form-label">Текст:</label>
-            <textarea id="textarea" class="form-input form-textarea"></textarea>
-        </form>
-    </section>
+        <!-- Список нотаток (картки із заголовком і уривком) -->
+        <section class="section" id="list">
+            <h2 class="section-title">Мої нотатки</h2>
 
-    <!-- Список нотаток (картки із заголовком і уривком) -->
-    <section class="section" id="list">
-        <h2 class="section-title">Мої нотатки</h2>
+            <div class="cards-container">
+            <article class="note-card">
+                <h3 class="note-title">Паролі від сервісів</h3>
+                <p class="note-text">Робоча пошта: admin123...</p>
+            </article>
 
-        <article class="note-card">
+            <article class="note-card">
+                <h3 class="note-title">Ідеї для проєкту</h3>
+                <p class="note-text">Зробити редизайн сторінки...</p>
+            </article>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Блок перегляду обраної нотатки повністю -->
+    <aside class="sidebar">
+        <h2 class="sidebar-title">Перегляд обраної нотатки</h2>
+        <article class="note-card note-card--full">
             <h3 class="note-title">Паролі від сервісів</h3>
-            <p class="note-text">Робоча пошта: admin123...</p>
+            <p class="note-text">Робоча пошта: admin123</p>
+            <p class="note-text">Пін-код від офісу: 4321</p>
         </article>
-
-        <article class="note-card">
-            <h3 class="note-title">Ідеї для проєкту</h3>
-            <p class="note-text">Зробити редизайн сторінки...</p>
-        </article>
-    </section>
-</main>
-
-<!-- Блок перегляду обраної нотатки повністю -->
-<aside class="sidebar">
-    <h2 class="sidebar-title">Перегляд обраної нотатки</h2>
-    <article class="note-card note-card--full">
-        <h3 class="note-title">Паролі від сервісів</h3>
-        <p class="note-text">Робоча пошта: admin123</p>
-        <p class="note-text">Пін-код від офісу: 4321</p>
-    </article>
-</aside>
-
+    </aside>
+</div>
 <!-- Підвал -->
 <footer class="footer">
     <p class="footer-text">Автор проєкту: Лаба Іван, 2026</p>
