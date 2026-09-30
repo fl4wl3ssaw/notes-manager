@@ -34,9 +34,9 @@ body {
 }
 .nav{
     display: flex;
-    flex-direction: column; /* Посилання на мобільному теж у стовпчик */
+    flex-direction: column;
     align-items: center;
-    gap: 10px; /* Замінює старий margin-right між пунктами */
+    gap: 10px;
 
 }
 .nav-link {
