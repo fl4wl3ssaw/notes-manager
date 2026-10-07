@@ -37,30 +37,32 @@
             <h2 class="section-title">Мої нотатки</h2>
 
             <div class="cards-container">
-            <article class="note-card">
-                <h3 class="note-title">Паролі від сервісів</h3>
-                <p class="note-text">Робоча пошта: admin123...</p>
-            </article>
+                <!-- Картка з паролем (з категорією) -->
+                <article class="note-card note-card--cat-pass">
+                    <h3 class="note-title">Паролі від сервісів</h3>
+                    <p class="note-text">Робоча пошта: <span class="pwd-value">admin123</span></p>
+                </article>
 
-            <article class="note-card">
-                <h3 class="note-title">Ідеї для проєкту</h3>
-                <p class="note-text">Зробити редизайн сторінки...</p>
-            </article>
+                <!-- Картка з ідеєю (з категорією) -->
+                <article class="note-card note-card--cat-ideas">
+                    <h3 class="note-title">Ідеї для проєкту</h3>
+                    <p class="note-text">Зробити редизайн сторінки...</p>
+                </article>
             </div>
-
         </section>
     </main>
 
     <!-- Блок перегляду обраної нотатки повністю -->
     <aside class="sidebar">
         <h2 class="sidebar-title">Перегляд обраної нотатки</h2>
-        <article class="note-card note-card--full">
+        <article class="note-card note-card--full note-card--cat-pass">
             <h3 class="note-title">Паролі від сервісів</h3>
-            <p class="note-text">Робоча пошта: admin123</p>
-            <p class="note-text">Пін-код від офісу: 4321</p>
+            <p class="note-text">Робоча пошта: <span class="pwd-value">admin123</span></p>
+            <p class="note-text">Пін-код від офісу: <span class="pwd-value">4321</span></p>
         </article>
     </aside>
 </div>
+
 <!-- Підвал -->
 <footer class="footer">
     <p class="footer-text">Автор проєкту: Лаба Іван, 2026</p>

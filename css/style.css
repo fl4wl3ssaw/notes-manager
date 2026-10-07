@@ -1,134 +1,53 @@
+/*
+   Обґрунтування нечіткої вимоги (Варіант 13: "має виглядати надійно й безпечно"):
+   Для створення відчуття приватності та безпеки обрано стриману темну палітру (--bg-main: #121212),
+   яка традиційно асоціюється із захищеними системами та терміналами розробників.
+   Як головний акцент довіри використано стриманий синій колір (--accent-safe: #3b82f6),
+   що є стандартом для банківських додатків та антивірусного ПЗ.
+   Завдяки високому контрасту тексту до фону (≥4.5:1) інтерфейс виглядає чітко,
+   а моноширинний шрифт унеможливлює помилкове прочитання символів у паролях.
+*/
+
+:root {
+    --bg-main: #121212;
+    --bg-surface: #1e1e1e;
+    --bg-card: #2b2b2b;
+
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+
+    --accent-safe: #3b82f6;
+    --cat-pass: #10b981;
+    --cat-ideas: #f59e0b;
+
+    --font-main: system-ui, -apple-system, sans-serif;
+    --font-mono: 'Consolas', 'Courier New', monospace;
+    --line-height-base: 1.5;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: system-ui, sans-serif;
+    font-family: var(--font-main);
     font-size: 1rem;
-    line-height: 1.4;
-    background-color: #2b2b2b;
-    color: #e0e0e0;
+    line-height: var(--line-height-base);
+    background-color: var(--bg-main);
+    color: var(--text-secondary);
 }
 
-.warning {
-    color: #ff4757;
-}
-
-.header {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-bottom: 1px solid #444;
-    text-align: center;
-    /* Вмикаємо Flexbox */
-    display: flex;
-    flex-direction: column; /* Елементи йдуть один під одним */
-    align-items: center; /* Центруємо по горизонталі */
-    gap: 15px; /* Відстань між заголовком та блоком навігації */
-}
-
-.header-title {
-    margin: 0;
-    color: #ffffff;
-    font-size: 2rem;
-}
-.nav{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-
-}
-.nav-link {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.nav-link:hover {
-    color: #ff4757;
-}
-
-.main {
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.section {
-    margin-bottom: 40px;
-}
-
-.section-title {
-    color: #ffffff;
-    border-bottom: 1px solid #444;
-    padding-bottom: 10px;
-}
-
-.form-label,
-.form-input{
-    display: block;
-    width: 100%;
-}
-.form-label {
-    margin-bottom: 5px;
-    margin-top: 15px;
-    color: #e0e0e0;
-}
-
-.form-input {
-    background-color: #3a3a3a;
-    color: #e0e0e0;
-    padding: 12px;
-    border: 1px solid #555;
-    border-radius: 6px;
-    font-family: inherit;
-}
-
-.form-textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-.note-card {
-    background-color: #333333;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-    max-height: 120px;
-    overflow: hidden;
-}
-
-.note-title {
+h1, h2, h3 {
+    color: var(--text-primary);
     margin-top: 0;
-    color: #ffffff;
 }
 
-.sidebar {
-    background-color: #121212;
-    padding: 20px;
-    border-left: 4px solid #ff4757;
-    max-width: 800px;
-    margin: 20px auto;
-    border-radius: 8px;
+img {
+    max-width: 100%;
+    height: auto;
 }
 
-.note-card--full {
-    background-color: #333333;
-    padding: 20px;
-    border-radius: 8px;
-    max-height: none;
-    overflow: visible;
-}
-
-.footer {
-    text-align: center;
-    padding: 30px 20px;
-    font-size: 0.85rem;
-    color: #888888;
-    border-top: 1px solid #444;
-    margin-top: 40px;
-}
 .layout-wrapper {
     display: grid;
     grid-template-columns: 1fr;
@@ -141,8 +60,155 @@ body {
     gap: 20px;
 }
 
-@media (min-width: 600px) {
+.main {
+    margin: 0 auto;
+    padding: 20px;
+}
 
+.header {
+    background-color: var(--bg-surface);
+    padding: 20px;
+    border-bottom: 1px solid #444;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: var(--accent-safe);
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #333;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+}
+
+.form-label,
+.form-input {
+    display: block;
+    width: 100%;
+}
+
+.form-label {
+    margin: 0;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.form-input {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.note-card {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.note-title {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.note-text {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.sidebar {
+    background-color: var(--bg-surface);
+    padding: 20px;
+    border-left: 4px solid var(--accent-safe);
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+.sidebar-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.note-card--full {
+    max-height: none;
+    overflow: visible;
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.85rem;
+    color: #888888;
+    border-top: 1px solid #444;
+    margin-top: 40px;
+}
+
+.pwd-value {
+    font-family: var(--font-mono);
+    letter-spacing: 1px;
+    color: var(--accent-safe);
+    background-color: #000000;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.note-card--cat-pass {
+    border-left: 4px solid var(--cat-pass);
+}
+
+.note-card--cat-ideas {
+    border-left: 4px solid var(--cat-ideas);
+}
+
+@media (min-width: 600px) {
     .header {
         flex-direction: row;
         justify-content: space-between;
@@ -156,6 +222,7 @@ body {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media (min-width: 1024px) {
     .layout-wrapper {
         grid-template-columns: 2fr 1fr;
@@ -167,8 +234,4 @@ body {
     .cards-container {
         grid-template-columns: repeat(3, 1fr);
     }
-}
-img {
-    max-width: 100%;
-    height: auto;
 }
