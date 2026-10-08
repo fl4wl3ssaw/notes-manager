@@ -152,6 +152,23 @@ img {
     gap: 10px;
     overflow: hidden;
 }
+.note-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin-bottom: -5px;
+}
+
+.note-card--cat-pass .note-category {
+    color: var(--cat-pass);
+}
+
+.note-card--cat-ideas .note-category {
+    color: var(--cat-ideas);
+}
 
 .note-title {
     margin: 0;
