@@ -30,6 +30,15 @@
 
                 <label for="textarea" class="form-label">Текст:</label>
                 <textarea id="textarea" class="form-input form-textarea"></textarea>
+                <label for="category" class="form-label">Категорія:</label>
+                <select id="category" class="form-input">
+                    <option value="Паролі">Паролі</option>
+                    <option value="Ідеї">Ідеї</option>
+                    <option value="Особисте">Особисте</option>
+                </select>
+                <label for="date" class="form-label">Дата:</label>
+                <input type="date" id="date" class="form-input">
+                <button type="submit" class="form-button">Додати нотатку</button>
             </form>
         </section>
 
@@ -37,21 +46,8 @@
         <section class="section" id="list">
             <h2 class="section-title">Мої нотатки</h2>
 
-            <div class="cards-container">
-                <!-- Картка з паролем (з категорією) -->
-                <article class="note-card note-card--cat-pass">
-                    <span class="note-category">Категорія: Паролі</span>
-                    <h3 class="note-title">Паролі від сервісів</h3>
-                    <p class="note-text">Робоча пошта: <span class="pwd-value">admin123</span></p>
-                </article>
-
-                <!-- Картка з ідеєю (з категорією) -->
-                <article class="note-card note-card--cat-ideas">
-                    <span class="note-category">Категорія: Ідеї</span>
-                    <h3 class="note-title">Ідеї для проєкту</h3>
-                    <p class="note-text">Зробити редизайн сторінки...</p>
-                </article>
-            </div>
+            <p id="notes-count" class="notes-count">Кількість нотаток: 0</p>
+            <div class="cards-container" id="notes-list"></div>
         </section>
     </main>
 

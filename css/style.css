@@ -142,6 +142,33 @@ img {
     min-height: 80px;
 }
 
+.form-button {
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 6px;
+    background-color: var(--accent-safe);
+    color: var(--text-primary);
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-button:hover {
+    filter: brightness(1.12);
+}
+
+.notes-count {
+    margin: 0 0 20px;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.note-date {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
 .note-card {
     background-color: var(--bg-card);
     padding: 20px;
@@ -223,6 +250,10 @@ img {
 
 .note-card--cat-ideas {
     border-left: 4px solid var(--cat-ideas);
+}
+
+.note-card--cat-особисте {
+    border-left: 4px solid var(--accent-safe);
 }
 
 @media (min-width: 600px) {
