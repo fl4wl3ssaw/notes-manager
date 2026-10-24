@@ -33,10 +33,9 @@ const notes = [
 ];
 
 // Крок 2: Прибрати статичний приклад через querySelector i .remove()
-const staticNote = document.querySelector('.static-example');
-if (staticNote) {
+document.querySelectorAll('.static-example').forEach((staticNote) => {
     staticNote.remove();
-}
+});
 
 // Знайдіть контейнер списку й елемент підсумку за їхніми id в HTML (#notes-list, #notes-count)
 const listContainer = document.querySelector('#notes-list');
@@ -73,7 +72,7 @@ function renderNotes(notesArray) {
         date.textContent = `Дата: ${note.date}`;
 
         // Крок 6: Додайте атрибут data-id та клас категорії
-        article.dataset.id = index + 1; // Установлює атрибут data-id="1", data-id="2"...
+        article.dataset.id = index + 1; // Установлює атрибут data-id="1", data-id="2" тощо.
         article.classList.add(`note-card--cat-${note.category.toLowerCase()}`);
 
         // Крок 7: Додайте всі створені елементи до картки, а картку — до контейнера списку.
