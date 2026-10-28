@@ -26,10 +26,11 @@
             <h2 class="section-title">Нова нотатка</h2>
             <form class="form">
                 <label for="title" class="form-label">Заголовок:</label>
-                <input type="text" id="title" class="form-input">
+                <input type="text" id="title" class="form-input" required>
 
-                <label for="textarea" class="form-label">Текст:</label>
-                <textarea id="textarea" class="form-input form-textarea"></textarea>
+                <label for="excerpt" class="form-label">Уривок (до 300 символів):</label>
+                <textarea id="excerpt" class="form-input form-textarea" maxlength="300" required aria-describedby="excerpt-counter"></textarea>
+                <p class="character-counter" id="excerpt-counter" aria-live="polite">0 / 300 символів</p>
                 <label for="category" class="form-label">Категорія:</label>
                 <select id="category" class="form-input">
                     <option value="Паролі">Паролі</option>
@@ -66,10 +67,11 @@
     <!-- Блок перегляду обраної нотатки повністю -->
     <aside class="sidebar">
         <h2 class="sidebar-title">Перегляд обраної нотатки</h2>
-        <article class="note-card note-card--full note-card--cat-pass">
-            <h3 class="note-title">Паролі від сервісів</h3>
-            <p class="note-text">Робоча пошта: <span class="pwd-value">admin123</span></p>
-            <p class="note-text">Пін-код від офісу: <span class="pwd-value">4321</span></p>
+        <article class="note-card note-card--full" aria-live="polite">
+            <p class="note-category" id="selected-category">Натисніть на нотатку у списку</p>
+            <h3 class="note-title" id="selected-title">Нотатку не вибрано</h3>
+            <p class="note-text" id="selected-text">Повний текст вибраної нотатки з’явиться тут.</p>
+            <p class="note-date" id="selected-date"></p>
         </article>
     </aside>
 </div>
