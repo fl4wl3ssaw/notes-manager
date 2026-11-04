@@ -47,19 +47,15 @@
         <section class="section" id="list">
             <h2 class="section-title">Мої нотатки</h2>
 
+            <!-- Крок 7: Покажіть окремий індикатор, поки очікується відповідь API. -->
+            <p id="loading-indicator" class="loading-indicator" role="status" aria-live="polite" hidden>Завантаження нотаток…</p>
+            <!-- Крок 8: Покажіть зрозумілу помилку та кнопку повторного запиту. -->
+            <div id="notes-error" class="notes-error" role="alert" hidden>
+                <p id="notes-error-message"></p>
+                <button type="button" class="form-button" id="retry-button">Оновити</button>
+            </div>
             <p id="notes-count" class="notes-count">Кількість нотаток: 0</p>
             <div class="cards-container" id="notes-list">
-                <!-- Статичний приклад: script.js видаляє його перед рендерингом нотаток. -->
-                <article class="note-card static-example">
-                    <h3 class="note-title">Приклад нотатки</h3>
-                    <p class="note-text">Цю картку буде видалено програмно.</p>
-                </article>
-                <!-- Картка з ідеєю (з категорією), повернена з минулих лабораторних -->
-                <article class="note-card note-card--cat-ideas static-example">
-                    <span class="note-category">Категорія: Ідеї</span>
-                    <h3 class="note-title">Ідеї для проєкту</h3>
-                    <p class="note-text">Зробити редизайн сторінки..аца.</p>
-                </article>
             </div>
         </section>
     </main>
