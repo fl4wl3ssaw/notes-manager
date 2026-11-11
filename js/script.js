@@ -1,187 +1,182 @@
-// Крок 1: Задайте перевірений endpoint JSONPlaceholder для нотаток користувача 1.
+// Крок 1: Оберіть React для props і локального реактивного стану карток.
 const API_URL = 'https://jsonplaceholder.typicode.com/posts?userId=1';
 
-// Крок 2: Зберігайте отримані з API та додані через форму нотатки в одному масиві.
-const notes = [];
+// Крок 4: Створіть компонент нотатки, який отримує title та excerpt через props.
+function NoteCard({ title, excerpt }) {
+    // Крок 6: Зберігайте стан розгортання всередині окремої картки.
+    const [expanded, setExpanded] = React.useState(false);
+    const preview = excerpt.length > 100 ? `${excerpt.slice(0, 100)}…` : excerpt;
 
-const form = document.querySelector('.form');
-const listContainer = document.querySelector('#notes-list');
-const notesCount = document.querySelector('#notes-count');
-const titleInput = document.querySelector('#title');
-const excerptInput = document.querySelector('#excerpt');
-const excerptCounter = document.querySelector('#excerpt-counter');
-const loadingIndicator = document.querySelector('#loading-indicator');
-const errorContainer = document.querySelector('#notes-error');
-const errorMessage = document.querySelector('#notes-error-message');
-const retryButton = document.querySelector('#retry-button');
-
-// Крок 6: Оновлюйте кількість нотаток після отримання чи додавання записів.
-function updateNotesCount() {
-    notesCount.textContent = `Кількість нотаток: ${notes.length}`;
-}
-
-// Крок 6: Відобразіть у DOM назву та текст body кожної нотатки.
-function renderNotes() {
-    listContainer.replaceChildren();
-
-    for (const [index, note] of notes.entries()) {
-        const article = document.createElement('article');
-        const category = document.createElement('p');
-        const title = document.createElement('h3');
-        const body = document.createElement('p');
-        const date = document.createElement('p');
-
-        article.classList.add('note-card');
-        category.classList.add('note-category');
-        title.classList.add('note-title');
-        body.classList.add('note-text');
-        date.classList.add('note-date');
-
-        category.textContent = `Категорія: ${note.category || 'API'}`;
-        title.textContent = note.title;
-        body.textContent = note.body;
-        date.textContent = note.date ? `Дата: ${note.date}` : '';
-
-        article.dataset.id = index + 1;
-        article.tabIndex = 0;
-        article.setAttribute('role', 'button');
-        article.setAttribute('aria-label', `Переглянути нотатку: ${note.title}`);
-        article.append(category, title, body, date);
-        listContainer.append(article);
+    function toggleExpanded() {
+        setExpanded((currentValue) => !currentValue);
     }
 
-    updateNotesCount();
-}
-
-// Крок 7: Під час запиту покажіть індикатор завантаження та заблокуйте повторний клік.
-function setLoading(isLoading) {
-    loadingIndicator.hidden = !isLoading;
-    retryButton.disabled = isLoading;
-}
-
-// Запит використовує публічний JSONPlaceholder API: https://jsonplaceholder.typicode.com/.
-// Кроки 2–4, 8: Асинхронно завантажте нотатки, дочекайтеся fetch і перевірте HTTP-статус.
-async function loadData() {
-    setLoading(true);
-    errorContainer.hidden = true;
-
-    try {
-        // Крок 3: Виконайте GET-запит і дочекайтеся відповіді сервера.
-        const response = await fetch(API_URL);
-
-        // Крок 4: Перетворіть неуспішний HTTP-статус на помилку для блоку catch.
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
+    function handleKeyDown(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            toggleExpanded();
         }
-
-        // Крок 5: Розберіть JSON і виведіть його структуру в консоль для перевірки.
-        const data = await response.json();
-        console.log('Дані нотаток із JSONPlaceholder:', data);
-
-        if (!Array.isArray(data)) {
-            throw new Error('API повернув дані не у форматі масиву.');
-        }
-
-        // Крок 6: Перенесіть поля id, title і body з відповіді API до масиву нотаток.
-        notes.splice(0, notes.length, ...data.map((post) => ({
-            id: post.id,
-            title: post.title,
-            body: post.body,
-            category: 'API'
-        })));
-
-        // Крок 6: Оновіть список на сторінці отриманими даними.
-        renderNotes();
-        document.querySelector('#selected-title').textContent = 'Нотатку не вибрано';
-        document.querySelector('#selected-category').textContent = 'Натисніть на нотатку у списку';
-        document.querySelector('#selected-text').textContent = 'Повний текст вибраної нотатки з’явиться тут.';
-        document.querySelector('#selected-date').textContent = '';
-    } catch (error) {
-        // Кроки 8–9: Offline або інша помилка потрапляє сюди; покажіть повідомлення й запишіть деталі в консоль.
-        console.error('Не вдалося завантажити нотатки:', error);
-        errorMessage.textContent = 'Нотатки недоступні офлайн.';
-        errorContainer.hidden = false;
-    } finally {
-        // Крок 7: Приховайте індикатор після успіху або помилки.
-        setLoading(false);
     }
+
+    return (
+        <article
+            className="note-card note-card--cat-api"
+            role="button"
+            tabIndex={0}
+            aria-expanded={expanded}
+            onClick={toggleExpanded}
+            onKeyDown={ handleKeyDown}
+        >
+            <h3 className="note-title">{title}</h3>
+            <p className="note-text">{expanded ? excerpt : preview}</p>
+            <span className="note-expand-hint">{expanded ? 'Згорнути' : 'Читати повністю'}</span>
+        </article>
+    );
 }
 
-// Попередня лабораторна: Покажіть вибрану нотатку у блоці перегляду через делегований click.
-listContainer.addEventListener('click', (event) => {
-    const noteCard = event.target.closest('.note-card[data-id]');
+function App() {
+    // Крок 3: Зберігайте отримані записи в реактивному стані React.
+    const [notes, setNotes] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState('');
+    const [title, setTitle] = React.useState('');
+    const [excerpt, setExcerpt] = React.useState('');
 
-    if (!noteCard || !listContainer.contains(noteCard)) {
-        return;
-    }
+    // Крок 2: Завантажуйте API-дані асинхронно після монтування компонента.
+    const loadData = React.useCallback(async () => {
+        setLoading(true);
+        setError('');
 
-    const note = notes[Number(noteCard.dataset.id) - 1];
-    if (!note) {
-        return;
-    }
+        try {
+            // Крок 3: Виконайте fetch-запит і дочекайтеся відповіді.
+            const response = await fetch(API_URL);
 
-    document.querySelector('#selected-title').textContent = note.title;
-    document.querySelector('#selected-category').textContent = `Категорія: ${note.category || 'API'}`;
-    document.querySelector('#selected-text').textContent = note.body;
-    document.querySelector('#selected-date').textContent = note.date ? `Дата: ${note.date}` : '';
-});
+            // Крок 4: Перевірте HTTP-статус відповіді перед читанням JSON.
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
 
-// Попередня лабораторна: Збережіть доступ до вибору нотатки з клавіатури.
-listContainer.addEventListener('keydown', (event) => {
-    if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('.note-card[data-id]')) {
+            // Крок 5: Розберіть JSON і виведіть масив у консоль для перевірки.
+            const posts = await response.json();
+            console.log('Нотатки з JSONPlaceholder:', posts);
+
+            if (!Array.isArray(posts)) {
+                throw new Error('API повернув дані не у форматі списку.');
+            }
+
+            // Крок 6: Перетворіть поля API title і body на props нотатки.
+            setNotes(posts.map((post) => ({
+                id: post.id,
+                title: post.title,
+                excerpt: post.body
+            })));
+        } catch (requestError) {
+            // Крок 8: Покажіть зрозуміле повідомлення та запишіть деталі в консоль.
+            console.error('Не вдалося завантажити нотатки:', requestError);
+            setError('Нотатки недоступні офлайн.');
+        } finally {
+            // Крок 7: Завершіть стан завантаження після відповіді або помилки.
+            setLoading(false);
+        }
+    }, []);
+
+    // Крок 3: Завантажте початковий список після першого рендерингу.
+    React.useEffect(() => {
+        loadData();
+    }, [loadData]);
+
+    function handleSubmit(event) {
         event.preventDefault();
-        event.target.click();
-    }
-});
+        if (!title.trim() || !excerpt.trim()) return;
 
-// Попередня лабораторна: Перевіряйте назву й лічильник уривка під час введення.
-function validateTitle() {
-    titleInput.setCustomValidity(titleInput.value.trim() ? '' : 'Введіть назву нотатки.');
-}
-
-function updateExcerptCounter() {
-    const length = excerptInput.value.length;
-    const nearLimit = length >= 270;
-
-    excerptCounter.textContent = `${length} / 300 символів`;
-    excerptCounter.classList.toggle('near-limit', nearLimit);
-    excerptInput.classList.toggle('near-limit', nearLimit);
-    excerptInput.setCustomValidity(length <= 300 ? '' : 'Уривок не може містити більше ніж 300 символів.');
-}
-
-titleInput.addEventListener('input', validateTitle);
-excerptInput.addEventListener('input', updateExcerptCounter);
-
-// Попередня лабораторна: Додайте нотатку з форми без перезавантаження сторінки.
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    validateTitle();
-    updateExcerptCounter();
-
-    if (!form.reportValidity()) {
-        return;
+        setNotes((currentNotes) => [
+            ...currentNotes,
+            {
+                id: `local-${Date.now()}`,
+                title: title.trim(),
+                excerpt: excerpt.trim()
+            }
+        ]);
+        setTitle('');
+        setExcerpt('');
     }
 
-    notes.push({
-        id: Date.now(),
-        title: titleInput.value.trim(),
-        body: excerptInput.value.trim(),
-        date: document.querySelector('#date').value || new Date().toISOString().slice(0, 10),
-        category: document.querySelector('#category').value
-    });
+    const nearLimit = excerpt.length >= 270;
 
-    renderNotes();
-    form.reset();
-    excerptInput.setCustomValidity('');
-    titleInput.setCustomValidity('');
-    updateExcerptCounter();
-});
+    return (
+        <>
+            <header className="header">
+                <h1 className="header-title">Менеджер нотаток</h1>
+                <nav className="nav">
+                    <a href="#new" className="nav-link">Нова нотатка</a>
+                    <a href="#list" className="nav-link">Мої нотатки</a>
+                </nav>
+            </header>
 
-// Крок 10: Дозвольте повторно запустити loadData кнопкою без перезавантаження сторінки.
-retryButton.addEventListener('click', loadData);
+            <div className="layout-wrapper">
+                <main className="main">
+                    <section className="section" id="new">
+                        <h2 className="section-title">Нова нотатка</h2>
+                        <form className="form" onSubmit={handleSubmit}>
+                            <label htmlFor="title" className="form-label">Заголовок:</label>
+                            <input
+                                id="title"
+                                className="form-input"
+                                value={title}
+                                onChange={(event) => setTitle(event.target.value)}
+                                required
+                            />
 
-// Крок 2: Запустіть перший запит до API під час завантаження сторінки.
-loadData();
+                            <label htmlFor="excerpt" className="form-label">Текст (до 300 символів):</label>
+                            <textarea
+                                id="excerpt"
+                                className={`form-input form-textarea${nearLimit ? ' near-limit' : ''}`}
+                                value={excerpt}
+                                onChange={(event) => setExcerpt(event.target.value.slice(0, 300))}
+                                maxLength={300}
+                                required
+                                aria-describedby="excerpt-counter"
+                            />
+                            <p id="excerpt-counter" className={`character-counter${nearLimit ? ' near-limit' : ''}`} aria-live="polite">
+                                {excerpt.length} / 300 символів
+                            </p>
+                            <button type="submit" className="form-button">Додати нотатку</button>
+                        </form>
+                    </section>
 
-// Попередня лабораторна: Початкове значення лічильника символів.
-updateExcerptCounter();
+                    <section className="section" id="list">
+                        <h2 className="section-title">Мої нотатки</h2>
+
+                        {/* Крок 7: Замініть ручний DOM-рендер декларативним JSX. */}
+                        {loading && <p className="loading-indicator" role="status">Завантаження нотаток…</p>}
+                        {error && (
+                            <div className="notes-error" role="alert">
+                                <p>{error}</p>
+                                <button type="button" className="form-button" onClick={loadData} disabled={loading}>
+                                    Оновити
+                                </button>
+                            </div>
+                        )}
+                        <p className="notes-count">Кількість нотаток: {notes.length}</p>
+
+                        {/* Крок 5: Створіть картки через map з унікальним key та потрібними props. */}
+                        <div className="cards-container" id="notes-list">
+                            {notes.map((note) => (
+                                <NoteCard key={note.id} title={note.title} excerpt={note.excerpt} />
+                            ))}
+                        </div>
+                    </section>
+                </main>
+            </div>
+
+            <footer className="footer">
+                <p className="footer-text">Автор проєкту: Лаба Іван, 2026</p>
+            </footer>
+        </>
+    );
+}
+
+// Крок 8: Переконайтеся, що React оновлює список після зміни стану без ручного DOM-коду.
+// Крок 9: Перевірте дерево App і NoteCard та їхній state у React Developer Tools.
+// Крок 10: Оберіть React за декларативний рендеринг і керування локальним state.
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
