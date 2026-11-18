@@ -161,6 +161,29 @@ img {
     color: #fca5a5;
 }
 
+.storage-warning {
+    padding: 12px 16px;
+    border-left: 4px solid #f59e0b;
+    border-radius: 6px;
+    background-color: var(--bg-card);
+    color: #fcd34d;
+}
+
+.form-actions,
+.note-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.form-button--secondary {
+    background-color: #4b5563;
+}
+
+.form-button--danger {
+    background-color: #b91c1c;
+}
+
 .form-button:disabled {
     cursor: wait;
     opacity: 0.7;
@@ -179,6 +202,18 @@ img {
     color: var(--accent-safe);
     font-size: 0.85rem;
     font-weight: bold;
+}
+
+.note-expand-button {
+    align-self: flex-start;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent-safe);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .form-button {
