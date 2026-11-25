@@ -1,3 +1,4 @@
+/* Крок 1: Для варіанта 13 обрано CSS-анімацію карток і лічильника, а не Canvas. */
 :root {
     --bg-main: #121212;
     --bg-surface: #1e1e1e;
@@ -136,6 +137,8 @@ img {
     margin: -10px 0 0;
     font-size: 0.85rem;
     color: var(--text-secondary);
+    /* Крок 6: Плавно змінюйте колір лічильника при наближенні до ліміту. */
+    transition: color 300ms ease;
 }
 
 .near-limit,
@@ -281,6 +284,20 @@ img {
     font-size: 0.95rem;
 }
 
+/* Крок 2: Анімуйте розгортання і згортання тексту через перехід max-height. */
+.note-text--expandable {
+    max-height: 4.5em;
+    overflow: hidden;
+    transition: max-height 400ms ease;
+}
+
+.note-text--expandable.is-expanded {
+    max-height: 40em;
+}
+
+/* Крок 3: Canvas і 2D-контекст не потрібні для CSS-варіанта 13. */
+/* Крок 5: Цикл requestAnimationFrame не потрібний, бо використовується CSS transition. */
+
 .sidebar {
     background-color: var(--bg-surface);
     padding: 20px;
@@ -359,5 +376,13 @@ img {
 
     .cards-container {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Крок 8: Поважайте системне налаштування зменшення руху та вимикайте переходи. */
+@media (prefers-reduced-motion: reduce) {
+    .note-text--expandable,
+    .character-counter {
+        transition: none;
     }
 }

@@ -1,4 +1,3 @@
-// Крок 1: Описуйте нотатку полями id, title і text; реальні паролі не зберігайте.
 const DB_NAME = 'notes';
 const DB_VERSION = 1;
 const STORE_NAME = 'notes';
@@ -7,8 +6,6 @@ const MIGRATION_KEY = 'notes-indexeddb-migrated';
 const API_URL = 'https://jsonplaceholder.typicode.com/posts?userId=1';
 
 let databasePromise;
-
-// Крок 2: Зберігайте масив нотаток у localStorage як JSON-рядок.
 function saveToLocalStorage(items) {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
@@ -18,8 +15,6 @@ function saveToLocalStorage(items) {
         return false;
     }
 }
-
-// Крок 2: Читайте JSON із localStorage і безпечно обробляйте пошкоджені дані.
 function loadFromLocalStorage() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -40,9 +35,6 @@ function loadFromLocalStorage() {
         return [];
     }
 }
-
-// Крок 5: Спроєктуйте базу notes v1 зі сховищем notes і ключем id.
-// Крок 6: Відкрийте IndexedDB та створіть сховище під час першого запуску/оновлення версії.
 function openDB() {
     if (!databasePromise) {
         databasePromise = new Promise((resolve, reject) => {
@@ -71,8 +63,6 @@ function openDB() {
 
     return databasePromise;
 }
-
-// Крок 7: Запишіть нову нотатку в IndexedDB через readwrite-транзакцію.
 async function addItem(note) {
     const database = await openDB();
     return new Promise((resolve, reject) => {
@@ -83,8 +73,6 @@ async function addItem(note) {
         transaction.onabort = () => reject(transaction.error || new Error('Додавання нотатки перервано.'));
     });
 }
-
-// Крок 7: Оновіть наявний запис через put із незмінним id.
 async function updateItem(note) {
     const database = await openDB();
     return new Promise((resolve, reject) => {
@@ -95,8 +83,6 @@ async function updateItem(note) {
         transaction.onabort = () => reject(transaction.error || new Error('Оновлення нотатки перервано.'));
     });
 }
-
-// Крок 7: Отримайте всі нотатки через readonly-транзакцію.
 async function getAllItems() {
     const database = await openDB();
     return new Promise((resolve, reject) => {
@@ -107,8 +93,6 @@ async function getAllItems() {
         transaction.onerror = () => reject(transaction.error || new Error('Помилка читання IndexedDB.'));
     });
 }
-
-// Крок 7: Видаліть нотатку за id через readwrite-транзакцію.
 async function deleteItem(id) {
     const database = await openDB();
     return new Promise((resolve, reject) => {
@@ -136,8 +120,6 @@ function markMigrationComplete() {
         console.error('Не вдалося зберегти прапорець міграції:', error);
     }
 }
-
-// Крок 8: Перенесіть localStorage-нотатки пакетно лише один раз, якщо IndexedDB порожня.
 async function migrateLocalStorageToIndexedDB(databaseItems) {
     const migrationDone = isMigrationComplete();
     if (databaseItems.length > 0) {
@@ -163,8 +145,6 @@ async function migrateLocalStorageToIndexedDB(databaseItems) {
     markMigrationComplete();
     return getAllItems();
 }
-
-// Крок 12: Додайте короткі коментарі до IndexedDB-функцій і збережіть роботу.
 function App() {
     const [notes, setNotes] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
@@ -175,8 +155,6 @@ function App() {
     const [editingId, setEditingId] = React.useState(null);
     const [saving, setSaving] = React.useState(false);
     const formSectionRef = React.useRef(null);
-
-    // Крок 9: Завантажте список зі сховища й оновлюйте React state отриманими записами.
     const loadData = React.useCallback(async () => {
         setLoading(true);
         setError('');
@@ -188,7 +166,6 @@ function App() {
             savedNotes = await migrateLocalStorageToIndexedDB(databaseItems);
             if (savedNotes.length > 0) saveToLocalStorage(savedNotes);
         } catch (databaseError) {
-            // Крок 11: Поясніть, коли IndexedDB недоступна, і спробуйте localStorage.
             console.error('IndexedDB недоступна:', databaseError);
             indexedDBAvailable = false;
             setStorageWarning('IndexedDB недоступна; використовую localStorage.');
@@ -202,7 +179,6 @@ function App() {
         }
 
         try {
-            // Крок 9: Якщо локальні сховища порожні, завантажте початкові нотатки з API.
             const response = await fetch(API_URL);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
@@ -242,8 +218,6 @@ function App() {
             setLoading(false);
         }
     }, []);
-
-    // Крок 4 і 10: Перевіряйте localStorage та IndexedDB у DevTools після перезавантаження.
     React.useEffect(() => {
         loadData();
     }, [loadData]);
@@ -251,8 +225,6 @@ function App() {
     function createId() {
         return window.crypto?.randomUUID?.() ?? `note-${Date.now()}-${Math.random().toString(16).slice(2)}`;
     }
-
-    // Крок 3: Збережіть кожне додавання, редагування чи видалення в обох сховищах.
     async function saveMutation(nextNotes, operation) {
         setSaving(true);
         setStorageWarning('');
@@ -268,7 +240,6 @@ function App() {
                 setStorageWarning('Нотатку збережено в IndexedDB, але не вдалося оновити localStorage.');
             }
         } catch (databaseError) {
-            // Крок 11: Залиште localStorage як резерв, якщо CRUD-операція IndexedDB не вдалася.
             console.error('Не вдалося зберегти зміни в IndexedDB:', databaseError);
             setNotes(nextNotes);
             setStorageWarning('IndexedDB недоступна; зміни збережені лише в localStorage.');
@@ -276,8 +247,6 @@ function App() {
             setSaving(false);
         }
     }
-
-    // Крок 3: Додайте новий запис у localStorage та IndexedDB.
     async function handleSubmit(event) {
         event.preventDefault();
         if (!title.trim() || !text.trim()) return;
@@ -296,16 +265,12 @@ function App() {
         setText('');
         setEditingId(null);
     }
-
-    // Крок 3: Завантажте нотатку у форму редагування, зберігши її id.
     function handleEdit(note) {
         setEditingId(note.id);
         setTitle(note.title);
         setText(note.text);
         formSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-
-    // Крок 3: Видаліть нотатку з обох сховищ і повторно прочитайте список.
     async function handleDelete(noteId) {
         const nextNotes = notes.filter((note) => note.id !== noteId);
         await saveMutation(nextNotes, () => deleteItem(noteId));
@@ -316,6 +281,7 @@ function App() {
         }
     }
 
+    // Крок 6: Зв’яжіть колір лічильника з реальною довжиною тексту у формі.
     const nearLimit = text.length >= 270;
 
     return (
@@ -373,6 +339,7 @@ function App() {
                         {storageWarning && <p className="storage-warning" role="status">{storageWarning}</p>}
                         <p className="notes-count">Кількість нотаток: {notes.length}</p>
                         <div className="cards-container" id="notes-list">
+                            {/* Крок 4: Відображайте збережені нотатки з актуального масиву застосунку. */}
                             {notes.map((note) => (
                                 <NoteCard
                                     key={note.id}
@@ -393,17 +360,17 @@ function App() {
         </>
     );
 }
-
-// Крок 3: Редагуйте або видаляйте нотатку з картки без зміни її ідентифікатора.
 function NoteCard({ note, disabled, onEdit, onDelete }) {
-    // Крок 6: Керуйте розгортанням тексту локальним станом компонента.
+    // Крок 6: Зберігайте стан розгортання локально в компоненті картки.
     const [expanded, setExpanded] = React.useState(false);
-    const preview = note.text.length > 100 ? `${note.text.slice(0, 100)}…` : note.text;
 
     return (
         <article className="note-card note-card--cat-api">
             <h3 className="note-title">{note.title}</h3>
-            <p className="note-text">{expanded ? note.text : preview}</p>
+            <p className={`note-text note-text--expandable${expanded ? ' is-expanded' : ''}`} aria-expanded={expanded}>
+                {note.text}
+            </p>
+            {/* Крок 7: Дайте користувачу кнопку для перемикання розгорнутого стану. */}
             <button type="button" className="note-expand-button" onClick={() => setExpanded((value) => !value)}>
                 {expanded ? 'Згорнути' : 'Читати повністю'}
             </button>
@@ -414,6 +381,5 @@ function NoteCard({ note, disabled, onEdit, onDelete }) {
         </article>
     );
 }
-
-// Крок 12: Запустіть React-компонент у кореневому елементі сторінки.
+// Крок 9: Задокументуйте анімаційні зміни й збережіть їх описовим комітом.
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
